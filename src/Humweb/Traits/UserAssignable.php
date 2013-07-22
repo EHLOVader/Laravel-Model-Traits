@@ -57,7 +57,7 @@ trait UserAssignable
      */
     protected static function getUserAssignableFields()
     {
-        if (empty($this->userAssignableFields))
+        if (empty(static::$userAssignableFields))
         {
             static::$userAssignableFields = [
                 'created' => 'created_by',
@@ -65,7 +65,7 @@ trait UserAssignable
                 'deleted' => 'deleted_by',
             ];
         }
-        return static::$userAssignableField;
+        return static::$userAssignableFields;
     }
 
 
@@ -172,6 +172,41 @@ trait UserAssignable
 
     
     // -------------------------------------------------------------------------
+    // Query Scopes
+    // -------------------------------------------------------------------------
+
+    /**
+     * Scope Query whereCreatedBy
+     * @return object
+     */
+    public function scopeWherCreatedBy($query, $id)
+    {
+        return $query->where($this->userAssignableField['created'], $id);
+    }
+
+
+    /**
+     * Scope Query whereUpdatedBy
+     * @return object
+     */
+    public function scopeWherUpdatedBy($query, $id)
+    {
+        return $query->where($this->userAssignableField['updated'], $id);
+    }
+
+
+    /**
+     * Scope Query whereDeletedBy
+     * You must use the method Model::withTrashed() to get any results
+     * @return object
+     */
+    public function scopeWherDeletedBy($query, $id)
+    {
+        return $query->where($this->userAssignableField['deleted'], $id);
+    }
+
+
+    // -------------------------------------------------------------------------
     // Relationships
     // -------------------------------------------------------------------------
     
@@ -187,6 +222,7 @@ trait UserAssignable
         }
         return $this;
     }
+
 
     /**
      * Relationship to fetch updated by
@@ -232,8 +268,9 @@ trait UserAssignable
     {
         if ( ! static::$userAssignableBooted)
         {
-            static::$userAssignableBooted = true;
             parent::boot();
+            static::$userAssignableBooted = true;
+            static::getUserAssignableFields();
             static::handleUserAssignableEvents();
         }
     }
