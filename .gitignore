@@ -1,0 +1,8 @@
+/vendor
+/tests
+phpunit.php
+phpunit.xml
+.travis.yml
+composer.phar
+composer.lock
+.DS_Store
