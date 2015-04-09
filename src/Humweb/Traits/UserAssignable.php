@@ -61,9 +61,9 @@ trait UserAssignable
         if (empty(static::$userAssignableFields))
         {
             static::$userAssignableFields = [
-                'created' => 'created_by',
-                'updated' => 'updated_by',
-                'deleted' => 'deleted_by',
+                'created' => 'created_by_id',
+                'updated' => 'updated_by_id',
+                'deleted' => 'deleted_by_id',
             ];
         }
         return static::$userAssignableFields;
