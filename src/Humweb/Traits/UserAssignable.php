@@ -9,6 +9,7 @@
  * 
  */
 
+use Auth;
 
 trait UserAssignable
 {
