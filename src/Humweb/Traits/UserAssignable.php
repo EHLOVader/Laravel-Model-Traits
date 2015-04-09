@@ -221,7 +221,6 @@ trait UserAssignable
         {
             return $this->belongsTo($this->getUserAssignableModel(), $this->userAssignableField['created']);
         }
-        return $this;
     }
 
 
@@ -235,7 +234,6 @@ trait UserAssignable
         {
             return $this->belongsTo($this->getUserAssignableModel(), $this->userAssignableField['updated']);
         }
-        return $this;
     }
 
     /**
@@ -248,7 +246,6 @@ trait UserAssignable
         {
             return $this->belongsTo($this->getUserAssignableModel(), $this->userAssignableField['deleted']);
         }
-        return $this;
     }
 
     /**
