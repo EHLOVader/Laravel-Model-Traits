@@ -9,7 +9,6 @@
  * 
  */
 
-use Auth;
 
 trait UserAssignable
 {
@@ -44,9 +43,9 @@ trait UserAssignable
      */
     protected static function userAssignableCallback()
     {
-        if (Auth::check())
+        if (\Auth::check())
         {
-            return Auth::user()->id;
+            return \Auth::user()->id;
         }
 
         return 0;
