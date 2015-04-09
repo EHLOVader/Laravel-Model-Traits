@@ -35,7 +35,7 @@ trait UserAssignable
      * The User model used for relationships
      * @var string
      */
-    protected static $userAssignableModel = 'Cartalyst\Sentry\Users\Eloquent\User';
+    protected static $userAssignableModel = 'App\User';
     
     /**
      * Method to fetch the current user's ID
@@ -43,10 +43,11 @@ trait UserAssignable
      */
     protected static function userAssignableCallback()
     {
-        if ($user = \Sentry::getUser())
+        if (Auth::check())
         {
-            return $user->id;
+            return Auth::user()->id;
         }
+
         return 0;
     }
 
@@ -167,7 +168,7 @@ trait UserAssignable
      */
     protected static function getUserAssignableModel()
     {
-        return $this->userAssignableModel;
+        return static::$userAssignableModel;
     }
 
     
